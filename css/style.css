@@ -506,7 +506,6 @@ body::after {
 .hero-scroll-hint { transition: color 0.15s ease; }
 .hero-scroll-hint.light-mode { color: var(--black); }
 .hero-scroll-hint.light-mode::before { background: var(--black); transition: background 0.15s ease; }
-.hero-scroll-hint.light-mode .sound-toggle { color: var(--black); }
 
 .nav-links {
   display: flex;
@@ -907,19 +906,6 @@ body::after {
   background: var(--amber);
   display: block;
 }
-.sound-toggle {
-  background: none;
-  border: none;
-  color: var(--white-dim);
-  cursor: none;
-  padding: 4px;
-  transition: color 0.15s ease;
-  display: flex;
-  align-items: center;
-  transition: color 0.3s;
-}
-.sound-toggle:hover { color: var(--amber); }
-
 .scroll-arrow {
   width: 16px;
   height: 24px;
@@ -1247,6 +1233,7 @@ body::after {
   z-index: 1;
   padding: clamp(150px, 18vh, 280px) clamp(32px, 6vw, 100px);
   background: url('../assets/All-bg/new-results.webp') center/100% 100% no-repeat;
+  overflow: visible;
 }
 .results-wrap {
 }
@@ -1266,6 +1253,7 @@ body::after {
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  overflow: visible;
 }
 .spline-results-canvas {
   width: 130%;

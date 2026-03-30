@@ -16,51 +16,6 @@ function smoothScrollTo(targetPos) {
   }
 }
 
-/* ---- BACKGROUND AUDIO (desktop only) ---- */
-(function initBgAudio() {
-  const isMobileAudio = window.matchMedia('(pointer: coarse)').matches || window.innerWidth <= 768;
-  if (isMobileAudio) return;
-  const audio = document.getElementById('bg-audio');
-  const btn = document.getElementById('sound-toggle');
-  if (!audio) return;
-  audio.volume = 0.4;
-  let started = false;
-  let muted = false;
-
-  function updateIcon() {
-    if (!btn) return;
-    btn.querySelector('.sound-on').style.display = muted ? 'none' : 'block';
-    btn.querySelector('.sound-off').style.display = muted ? 'block' : 'none';
-  }
-
-  function tryPlay() {
-    if (started) return;
-    audio.play().then(() => {
-      started = true;
-    }).catch(() => {
-      started = false;
-    });
-  }
-
-  if (btn) {
-    btn.addEventListener('click', function (e) {
-      e.stopPropagation();
-      muted = !muted;
-      audio.muted = muted;
-      updateIcon();
-      if (!started) tryPlay();
-    });
-  }
-
-  // Try immediately on page load
-  tryPlay();
-
-  // Fallback: retry on any user interaction if browser blocked autoplay
-  ['click', 'scroll', 'keydown', 'touchstart', 'mousedown'].forEach(evt => {
-    document.addEventListener(evt, tryPlay, { once: false, passive: true });
-  });
-})();
-
 /* ---- SMOOTH SCROLL (Lenis — fixes Windows wheel jumping) ---- */
 const lenis = new Lenis({
   duration: 0.6,
@@ -89,7 +44,7 @@ if (!isTouchDevice && cursor) {
     cursor.style.top  = mouseY + 'px';
   });
 
-  document.querySelectorAll('a, button, .tier, .who-item, [onclick], .nav-links a, .sound-toggle, .fixed-cta').forEach(el => {
+  document.querySelectorAll('a, button, .tier, .who-item, [onclick], .nav-links a, .fixed-cta').forEach(el => {
     el.addEventListener('mouseenter', () => {
       cursor.classList.add('hover');
     });
