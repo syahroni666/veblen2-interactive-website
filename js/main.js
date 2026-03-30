@@ -11,6 +11,23 @@ document.addEventListener('click', function(e) {
 
 /* ---- SEAMLESS LOOP SETUP (runs after layout is ready) ---- */
 window.addEventListener('load', function() {
+  // Mobile: merge all testimonial cards into one column
+  if (window.innerWidth <= 900) {
+    var cols = document.querySelectorAll('.testimonials-col');
+    if (cols.length > 1) {
+      var firstScroll = cols[0].querySelector('.testimonials-scroll');
+      for (var i = 1; i < cols.length; i++) {
+        var cards = cols[i].querySelectorAll('.testimonial-card');
+        cards.forEach(function(card) {
+          firstScroll.appendChild(card);
+        });
+        cols[i].remove();
+      }
+      cols[0].classList.add('mobile-testimonial-col');
+      firstScroll.style.setProperty('--scroll-duration', '80s');
+    }
+  }
+
   // Testimonial columns — vertical scroll
   document.querySelectorAll('.testimonials-scroll').forEach(col => {
     const cards = col.innerHTML;

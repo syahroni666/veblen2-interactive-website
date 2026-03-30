@@ -152,6 +152,63 @@ body {
   font-size: 12px;
 }
 
+/* ---- TESTIMONIALS ---- */
+.testimonials-section {
+  padding: clamp(60px, 8vh, 100px) 20px;
+}
+.testimonials-header {
+  margin-bottom: clamp(24px, 4vh, 40px);
+}
+.testimonials-title {
+  font-size: clamp(28px, 7vw, 40px);
+}
+.testimonials-subtitle {
+  font-size: clamp(13px, 3.5vw, 16px);
+}
+.testimonials-marquee-wrapper {
+  margin-top: 16px;
+}
+.testimonials-marquee-track img {
+  height: 18px;
+}
+.testimonials-columns {
+  max-height: 500px;
+  flex-direction: column;
+  gap: 0;
+}
+.testimonials-col {
+  display: none;
+  flex: 0 0 100%;
+}
+.testimonials-col.mobile-testimonial-col {
+  display: block;
+}
+.testimonials-col-mid {
+  margin-top: 0;
+}
+.testimonial-card {
+  padding: 20px;
+  border-radius: 16px;
+}
+.testimonial-text {
+  font-size: 13px;
+  margin-bottom: 16px;
+}
+.testimonial-avatar {
+  width: 36px;
+  height: 36px;
+}
+.testimonial-name {
+  font-size: 13px;
+}
+.testimonial-role {
+  font-size: 11px;
+}
+.testimonial-stars {
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
 /* ---- RESULTS ACCORDION ---- */
 .results-section {
   padding: clamp(60px, 8vh, 100px) 20px;
