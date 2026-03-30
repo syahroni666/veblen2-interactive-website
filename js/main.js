@@ -2,6 +2,42 @@
    VEBLEN GROUP v2 — MAIN JAVASCRIPT
    ============================================ */
 
+/* ---- TESTIMONIAL READ MORE TOGGLE ---- */
+document.addEventListener('click', function(e) {
+  if (e.target.classList.contains('testimonial-readmore')) {
+    e.target.closest('.testimonial-card').classList.add('expanded');
+  }
+});
+
+/* ---- SEAMLESS LOOP SETUP (runs after layout is ready) ---- */
+window.addEventListener('load', function() {
+  // Testimonial columns — vertical scroll
+  document.querySelectorAll('.testimonials-scroll').forEach(col => {
+    const cards = col.innerHTML;
+    col.innerHTML = cards + cards;
+    const gap = parseFloat(getComputedStyle(col).gap) || 24;
+    const children = col.children;
+    const half = children.length / 2;
+    let halfHeight = 0;
+    for (let i = 0; i < half; i++) {
+      halfHeight += children[i].offsetHeight + gap;
+    }
+    col.style.setProperty('--scroll-distance', '-' + halfHeight + 'px');
+  });
+
+  // Logo marquee — horizontal scroll
+  document.querySelectorAll('.testimonials-marquee-track').forEach(track => {
+    var imgs = track.children;
+    var half = imgs.length / 2;
+    var gap = parseFloat(getComputedStyle(track).gap) || 40;
+    var halfWidth = 0;
+    for (var i = 0; i < half; i++) {
+      halfWidth += imgs[i].offsetWidth + gap;
+    }
+    track.style.setProperty('--marquee-distance', '-' + halfWidth + 'px');
+  });
+});
+
 /* ---- ALWAYS START FROM TOP ON REFRESH ---- */
 window.scrollTo(0, 0);
 
@@ -375,7 +411,7 @@ window.addEventListener('scroll', () => {
   const scrollY = window.scrollY;
 
   // Detect if navbar overlaps any light (cream/white) section
-  const lightSections = document.querySelectorAll('#scene-scroll-text, .results-section, .pricing-section');
+  const lightSections = document.querySelectorAll('#scene-scroll-text, .testimonials-section, .results-section, .pricing-section');
   const fixedCta = document.querySelector('.fixed-cta');
   const viewH = window.innerHeight;
   let overLight = false;
