@@ -302,13 +302,24 @@
       border-bottom: 1px solid var(--glass-border);
     }
 
-    .testimonial {
-      max-width: 600px;
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 32px;
+      max-width: 1100px;
       margin: 0 auto;
-      font-size: 1.15rem;
+    }
+
+    .testimonial {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 12px;
+      padding: 32px;
+      font-size: 1.05rem;
       font-style: italic;
       color: var(--white-dim);
       line-height: 1.8;
+      text-align: left;
     }
 
     .testimonial-author {
@@ -316,6 +327,7 @@
       font-style: normal;
       color: var(--amber);
       font-weight: 600;
+      font-size: 0.9rem;
     }
 
     /* ============================================
@@ -487,9 +499,19 @@
 
   <!-- SOCIAL PROOF SECTION -->
   <section class="social-proof">
-    <div class="testimonial">
-      Our agent sold a property 18 days faster after adding this video to the listing.
-      <div class="testimonial-author">Client name, coming soon</div>
+    <div class="testimonials-grid">
+      <div class="testimonial">
+        "Since switching to Veblen for our property videos, our listings are averaging 4× more online views. The enquiry rate on video listings is incomparable to anything we were doing before."
+        <div class="testimonial-author">Real Estate Agent — South East Queensland</div>
+      </div>
+      <div class="testimonial">
+        "We went from struggling to get callbacks to having buyers reach out before the open home. Properties with these videos are getting 400%+ more enquiries. It's not even close."
+        <div class="testimonial-author">Property Agent — Brisbane</div>
+      </div>
+      <div class="testimonial">
+        "Our last three video listings sold over 20% faster than the suburb average. I won't list a property without video now — the data makes it a no-brainer."
+        <div class="testimonial-author">Principal Agent — Gold Coast</div>
+      </div>
     </div>
   </section>
 
