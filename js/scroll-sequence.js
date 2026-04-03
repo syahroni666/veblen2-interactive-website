@@ -95,9 +95,21 @@
       revealWords();
     }
 
-    // ---- Results accordion ----
+    // ---- Results accordion (slide-up stack) ----
     var items = document.querySelectorAll('.results-item');
-    var imgs = document.querySelectorAll('.results-image');
+    var imgs = document.querySelectorAll('.results-img');
+    var resultsZ = 10;
+    var lastResultsIdx = null;
+    var currentResultsEl = null;
+    var resultsPauseTimer = null;
+    // First active image starts visible
+    var firstActive = document.querySelector('.results-img.active');
+    if (firstActive) {
+      firstActive.style.transform = 'translateY(0)';
+      firstActive.style.zIndex = resultsZ;
+      lastResultsIdx = firstActive.getAttribute('data-results-img');
+      currentResultsEl = firstActive;
+    }
     for (var a = 0; a < items.length; a++) {
       (function (item) {
         var header = item.querySelector('.results-item-header');
@@ -106,11 +118,35 @@
           var wasActive = item.classList.contains('active');
           var idx = item.getAttribute('data-results-idx');
           for (var b = 0; b < items.length; b++) items[b].classList.remove('active');
-          for (var c = 0; c < imgs.length; c++) imgs[c].classList.remove('active');
           if (!wasActive) {
             item.classList.add('active');
-            var t = document.querySelector('[data-results-img="' + idx + '"]');
-            if (t) t.classList.add('active');
+            // Same tab as last — just reopen accordion, no image animation
+            if (idx === lastResultsIdx) return;
+            var newImg = document.querySelector('[data-results-img="' + idx + '"]');
+            if (newImg) {
+              // Cancel any pending pause
+              if (resultsPauseTimer) clearTimeout(resultsPauseTimer);
+              // Place off-screen at bottom, higher z
+              resultsZ++;
+              newImg.style.transition = 'none';
+              newImg.style.transform = 'translateY(100%) scale(1.08)';
+              newImg.style.zIndex = resultsZ;
+              void newImg.offsetWidth;
+              // Slide up + zoom settle
+              newImg.style.transition = 'transform 0.8s cubic-bezier(0.65, 0, 0.35, 1)';
+              newImg.style.transform = 'translateY(0) scale(1)';
+              newImg.classList.add('active');
+              if (newImg.tagName === 'VIDEO') { newImg.currentTime = 0; newImg.play(); }
+              currentResultsEl = newImg;
+              lastResultsIdx = idx;
+              // Pause old videos after transition — check against current at that time
+              resultsPauseTimer = setTimeout(function () {
+                var allVideos = document.querySelectorAll('.results-image-area video');
+                for (var v = 0; v < allVideos.length; v++) {
+                  if (allVideos[v] !== currentResultsEl) allVideos[v].pause();
+                }
+              }, 850);
+            }
           }
         });
       })(items[a]);

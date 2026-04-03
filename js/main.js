@@ -55,9 +55,8 @@ window.addEventListener('load', function() {
   });
 });
 
-/* ---- ALWAYS START FROM TOP ON REFRESH ---- */
+/* ---- Refresh always starts at top ---- */
 window.scrollTo(0, 0);
-
 if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
 
 /* ---- GLOBAL SCROLL HELPER ---- */
@@ -197,6 +196,18 @@ setTimeout(() => {
     const tagBody = document.querySelector('.hero-tagline-body');
     splitAndAnimate(tagHeading, 0.2, 0.015);
     splitAndAnimate(tagBody, 0.6, 0.012);
+
+    // Animate hero logos (fade + blur in, staggered)
+    const heroLogos = document.querySelectorAll('.hero-tagline-logos img');
+    heroLogos.forEach((img, i) => {
+      img.style.opacity = '0';
+      img.style.filter = 'blur(8px)';
+      img.style.transition = 'opacity 0.5s ease, filter 0.5s ease';
+      setTimeout(() => {
+        img.style.opacity = '0.7';
+        img.style.filter = 'blur(0)';
+      }, 1200 + i * 150);
+    });
 
     // Show fixed CTA
     setTimeout(() => {
@@ -394,8 +405,10 @@ function initLogoAnimation() {
     startSize = isMobile ? Math.min(Math.max(window.innerWidth * 0.07, 20), 32)
                          : Math.min(Math.max(window.innerWidth * 0.06, 48), 80);
     endSize = isMobile ? 14 : Math.min(Math.max(window.innerWidth * 0.015, 16), 30);
-    const navH = document.getElementById('navbar').offsetHeight;
-    endTop = (navH - endSize * 1.2) / 2;
+    const navEl = document.getElementById('navbar');
+    const navH = navEl.offsetHeight;
+    const navTop = navEl.getBoundingClientRect().top;
+    endTop = navTop + (navH - endSize * 1.2) / 2;
     scrollEnd = window.innerHeight * 1.2;
   }
   calcLogoLayout();
@@ -428,7 +441,7 @@ window.addEventListener('scroll', () => {
   const scrollY = window.scrollY;
 
   // Detect if navbar overlaps any light (cream/white) section
-  const lightSections = document.querySelectorAll('#scene-scroll-text, .testimonials-section, .results-section, .pricing-section');
+  const lightSections = document.querySelectorAll('.testimonials-section');
   const fixedCta = document.querySelector('.fixed-cta');
   const viewH = window.innerHeight;
   let overLight = false;
@@ -955,6 +968,8 @@ document.querySelectorAll('.proof-number[data-target]').forEach(el => {
     el.appendChild(wrap);
   });
 })();
+
+/* ---- Pricing CTA buttons → open contact form (handled below) ---- */
 
 /* ---- CONTACT FORM MODAL ---- */
 const openBtn = document.getElementById('open-contact');
