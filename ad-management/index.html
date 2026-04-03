@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Done-for-You Ad Management From $300/wk | Veblen Group</title>
+  <meta name="description"
+    content="Meta and Google ads that actually convert. Done-for-you ad management with weekly reporting. From $300 per week." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" />
+
+  <style>
+    /* ============================================
+       RESET & VARIABLES
+       ============================================ */
+    :root {
+      --black: #080808;
+      --dark: #0f0f0f;
+      --charcoal: #1a1a1a;
+      --amber: #C9922A;
+      --amber-light: #E5B04A;
+      --white: #FFFFFF;
+      --white-dim: rgba(255, 255, 255, 0.7);
+      --white-faint: rgba(255, 255, 255, 0.15);
+      --font-display: 'Lexend', sans-serif;
+      --font-body: 'DM Sans', sans-serif;
+      --glass-bg: rgba(255, 255, 255, 0.03);
+      --glass-border: rgba(255, 255, 255, 0.08);
+      --glass-radius: 20px;
+      --glass-blur: 20px;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--black);
+      color: var(--white);
+      overflow-x: hidden;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 99990;
+      pointer-events: none;
+      opacity: 0.035;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 200px 200px;
+    }
+
+    /* ============================================
+       NAVBAR
+       ============================================ */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 clamp(20px, 5vw, 60px);
+      background: rgba(8, 8, 8, 0.95);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--glass-border);
+      z-index: 1000;
+    }
+
+    .nav-logo {
+      font-family: var(--font-display);
+      font-size: clamp(1.2rem, 3vw, 1.5rem);
+      font-weight: 700;
+      color: var(--white);
+      text-decoration: none;
+      letter-spacing: 2px;
+    }
+
+    nav a:hover {
+      color: var(--amber);
+      transition: color 0.3s ease;
+    }
+
+    .nav-cta {
+      background: var(--amber);
+      color: var(--black);
+      padding: 12px 24px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      letter-spacing: 0.5px;
+      transition: background 0.3s ease, transform 0.2s ease;
+      font-family: var(--font-body);
+      border: none;
+      cursor: pointer;
+    }
+
+    .nav-cta:hover {
+      background: var(--amber-light);
+      transform: translateY(-2px);
+    }
+
+    /* ============================================
+       HERO SECTION
+       ============================================ */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 120px 20px 80px;
+      position: relative;
+      background: linear-gradient(rgba(0,0,0,0.60), rgba(0,0,0,0.78)), url('https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+    }
+
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 5vw, 4.5rem);
+      font-weight: 700;
+      margin-bottom: 20px;
+      line-height: 1.2;
+      letter-spacing: -1px;
+    }
+
+    .hero p {
+      font-size: clamp(1rem, 2vw, 1.3rem);
+      color: var(--white-dim);
+      max-width: 700px;
+      margin-bottom: 40px;
+      line-height: 1.6;
+    }
+
+    .price-badge {
+      display: inline-block;
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      padding: 12px 24px;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      color: var(--amber);
+      font-weight: 600;
+      margin-bottom: 30px;
+      letter-spacing: 0.5px;
+    }
+
+    .hero-cta {
+      background: var(--amber);
+      color: var(--black);
+      padding: 18px 40px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 0.5px;
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+      font-family: var(--font-body);
+    }
+
+    .hero-cta:hover {
+      background: var(--amber-light);
+      transform: translateY(-3px);
+      box-shadow: 0 20px 40px rgba(201, 146, 42, 0.3);
+    }
+
+    /* ============================================
+       PAIN POINTS SECTION
+       ============================================ */
+    .pain-points {
+      padding: 100px clamp(20px, 5vw, 60px);
+      background: var(--charcoal);
+      text-align: center;
+    }
+
+    .pain-points h2 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      font-weight: 700;
+      margin-bottom: 60px;
+      letter-spacing: -0.5px;
+    }
+
+    .pain-list {
+      max-width: 800px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    .pain-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+      text-align: left;
+      padding: 20px;
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--glass-radius);
+      backdrop-filter: blur(var(--glass-blur));
+    }
+
+    .pain-icon {
+      font-size: 1.5rem;
+      flex-shrink: 0;
+      margin-top: 2px;
+      color: var(--amber);
+    }
+
+    .pain-text {
+      font-size: 1.05rem;
+      line-height: 1.6;
+      color: var(--white-dim);
+    }
+
+    /* ============================================
+       WHAT YOU GET SECTION
+       ============================================ */
+    .benefits {
+      padding: 100px clamp(20px, 5vw, 60px);
+      background: var(--black);
+    }
+
+    .benefits h2 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      font-weight: 700;
+      margin-bottom: 60px;
+      text-align: center;
+      letter-spacing: -0.5px;
+    }
+
+    .benefits-grid {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+    }
+
+    .benefit-card {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--glass-radius);
+      padding: 40px;
+      backdrop-filter: blur(var(--glass-blur));
+      transition: all 0.3s ease;
+    }
+
+    .benefit-card:hover {
+      background: rgba(201, 146, 42, 0.08);
+      border-color: var(--amber);
+    }
+
+    .benefit-icon {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      color: var(--amber);
+    }
+
+    .benefit-card h3 {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 15px;
+      line-height: 1.4;
+    }
+
+    .benefit-card p {
+      font-size: 0.95rem;
+      color: var(--white-dim);
+      line-height: 1.6;
+    }
+
+    /* ============================================
+       SOCIAL PROOF SECTION
+       ============================================ */
+    .social-proof {
+      padding: 80px clamp(20px, 5vw, 60px);
+      background: var(--charcoal);
+      text-align: center;
+      border-top: 1px solid var(--glass-border);
+      border-bottom: 1px solid var(--glass-border);
+    }
+
+    .testimonial {
+      max-width: 600px;
+      margin: 0 auto;
+      font-size: 1.15rem;
+      font-style: italic;
+      color: var(--white-dim);
+      line-height: 1.8;
+    }
+
+    .testimonial-author {
+      margin-top: 20px;
+      font-style: normal;
+      color: var(--amber);
+      font-weight: 600;
+    }
+
+    /* ============================================
+       SCHEDULER SECTION
+       ============================================ */
+    #scheduler {
+      padding: 100px clamp(20px, 5vw, 60px);
+      background: var(--black);
+      text-align: center;
+    }
+
+    #scheduler h2 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      font-weight: 700;
+      margin-bottom: 50px;
+      letter-spacing: -0.5px;
+    }
+
+    .scheduler-container {
+      max-width: 600px;
+      margin: 0 auto;
+      background: var(--glass-bg);
+      border: 2px solid var(--glass-border);
+      border-radius: var(--glass-radius);
+      padding: 60px 40px;
+      backdrop-filter: blur(var(--glass-blur));
+      min-height: 300px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .scheduler-placeholder {
+      color: var(--white-dim);
+      font-size: 1rem;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    .scheduler-button {
+      background: var(--amber);
+      color: var(--black);
+      padding: 16px 40px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 0.5px;
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+      font-family: var(--font-body);
+    }
+
+    .scheduler-button:hover {
+      background: var(--amber-light);
+      transform: translateY(-3px);
+      box-shadow: 0 20px 40px rgba(201, 146, 42, 0.3);
+    }
+
+    /* ============================================
+       FOOTER
+       ============================================ */
+    footer {
+      padding: 40px clamp(20px, 5vw, 60px);
+      background: var(--charcoal);
+      text-align: center;
+      border-top: 1px solid var(--glass-border);
+      font-size: 0.95rem;
+      color: var(--white-dim);
+    }
+
+    footer p {
+      margin: 0;
+      line-height: 1.8;
+    }
+
+    /* ============================================
+       MOBILE RESPONSIVE
+       ============================================ */
+    @media (max-width: 768px) {
+      nav {
+        padding: 0 20px;
+      }
+
+      .hero {
+        padding: 100px 20px 60px;
+      }
+
+      .pain-list,
+      .benefits-grid {
+        gap: 20px;
+      }
+
+      .benefit-card {
+        padding: 30px 20px;
+      }
+
+      .scheduler-container {
+        padding: 40px 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <nav>
+    <a href="../" class="nav-logo">VEBLEN</a>
+    <a href="#scheduler" class="nav-cta">Book a Call</a>
+  </nav>
+
+  <!-- HERO SECTION -->
+  <section class="hero">
+    <div class="price-badge">From $300 per week</div>
+    <h1>Your ads aren't working because you don't have a system</h1>
+    <p>We run Meta and Google ads that actually convert. You focus on the work. We handle the rest.</p>
+    <button class="hero-cta" onclick="document.getElementById('scheduler').scrollIntoView({ behavior: 'smooth' })">Book Your Free 10-Min Call</button>
+  </section>
+
+  <!-- PAIN POINTS SECTION -->
+  <section class="pain-points">
+    <h2>Sound familiar?</h2>
+    <div class="pain-list">
+      <div class="pain-item">
+        <div class="pain-icon">•</div>
+        <div class="pain-text">You're running ads yourself and getting poor results, or not running them at all</div>
+      </div>
+      <div class="pain-item">
+        <div class="pain-icon">•</div>
+        <div class="pain-text">You don't know which ads are profitable and which are bleeding money</div>
+      </div>
+      <div class="pain-item">
+        <div class="pain-icon">•</div>
+        <div class="pain-text">You're losing market share to competitors who are advertising smarter</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BENEFITS SECTION -->
+  <section class="benefits">
+    <h2>Here's what we do for you:</h2>
+    <div class="benefits-grid">
+      <div class="benefit-card">
+        <div class="benefit-icon">🎯</div>
+        <h3>Custom Ad Builds</h3>
+        <p>Ads built and tested for your specific offer and audience.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon">📊</div>
+        <h3>Weekly Reporting</h3>
+        <p>Performance reports that explain what's working and what's not.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon">⬇️</div>
+        <h3>Cost Optimisation</h3>
+        <p>Continuous optimisation to keep your cost-per-lead dropping month on month.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon">💬</div>
+        <h3>Direct Access</h3>
+        <p>Chat with your ads strategist whenever something needs adjusting.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOCIAL PROOF SECTION -->
+  <section class="social-proof">
+    <div class="testimonial">
+      A sparkie we work with went from $0 ad spend to $2,400 monthly revenue at a 4:1 ROAS.
+      <div class="testimonial-author">Client name, coming soon</div>
+    </div>
+  </section>
+
+  <!-- SCHEDULER SECTION -->
+  <section id="scheduler">
+    <h2>Book Your Free 10-Min Call</h2>
+    <div class="scheduler-container">
+      <div class="hubspot-scheduler-embed">
+        <div class="scheduler-placeholder">
+          HubSpot 10-min scheduler embed goes here once URL is confirmed
+        </div>
+        <a href="https://meetings-ap1.hubspot.com/zac-macanally/10-minute" class="scheduler-button" target="_blank" rel="noopener">Book Your Free 10-Min Call →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>&copy; 2026 Veblen Group.<br>Own the Market.</p>
+  </footer>
+
+</body>
+
+</html>
