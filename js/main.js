@@ -60,11 +60,13 @@ window.scrollTo(0, 0);
 if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
 
 /* ---- GLOBAL SCROLL HELPER ---- */
-function smoothScrollTo(targetPos) {
+function smoothScrollTo(targetPos, blockServices) {
+  if (blockServices !== false) window._navScrolling = true;
   if (typeof lenis !== 'undefined' && lenis && lenis.scrollTo) {
-    lenis.scrollTo(targetPos, { offset: 0 });
+    lenis.scrollTo(targetPos, { offset: 0, onComplete: function () { window._navScrolling = false; } });
   } else {
     window.scrollTo({ top: Math.max(0, targetPos), behavior: 'smooth' });
+    setTimeout(function () { window._navScrolling = false; }, 1200);
   }
 }
 
@@ -612,17 +614,22 @@ document.querySelectorAll('[data-scroll-to]').forEach(link => {
     var target = document.getElementById(targetId);
     if (!target) return;
 
-    var elTop = target.getBoundingClientRect().top + window.scrollY;
+    // services-section is position:fixed — use the wrapper for correct scroll position
+    var scrollTarget = targetId === 'services-section'
+      ? document.getElementById('services-scroll-wrapper')
+      : target;
+
+    var elTop = scrollTarget.getBoundingClientRect().top + window.scrollY;
     var offset = 0;
     var isMobile = window.innerWidth <= 900;
     if (targetId === 'services-section') {
-      offset = isMobile ? window.innerHeight * 0.35 : window.innerHeight * 0.2;
+      offset = 0;
     } else if (targetId === 'results-section') {
-      offset = isMobile ? -window.innerHeight * 0.25 : window.innerHeight * 0.2;
+      offset = isMobile ? 0 : window.innerHeight * 0.2;
     } else if (targetId === 'scene-pricing') {
-      offset = isMobile ? -window.innerHeight * 0.25 : 0;
+      offset = 0;
     }
-    smoothScrollTo(elTop + offset);
+    smoothScrollTo(elTop + offset, true);
   });
 });
 
